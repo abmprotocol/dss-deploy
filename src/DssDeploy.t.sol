@@ -13,20 +13,20 @@ contract DssDeployTest is DssDeployTestBase {
 
     function testFailMissingTaxation() public {
         dssDeploy.deployVat();
-        dssDeploy.deployDai(99);
+        dssDeploy.deploydotBtc(99);
         dssDeploy.deployAuctions(address(gov));
     }
 
     function testFailMissingAuctions() public {
         dssDeploy.deployVat();
         dssDeploy.deployTaxation();
-        dssDeploy.deployDai(99);
+        dssDeploy.deploydotBtc(99);
         dssDeploy.deployLiquidator();
     }
 
     function testFailMissingLiquidator() public {
         dssDeploy.deployVat();
-        dssDeploy.deployDai(99);
+        dssDeploy.deploydotBtc(99);
         dssDeploy.deployTaxation();
         dssDeploy.deployAuctions(address(gov));
         dssDeploy.deployShutdown(address(gov), address(0x0), 10);
@@ -34,7 +34,7 @@ contract DssDeployTest is DssDeployTestBase {
 
     function testFailMissingEnd() public {
         dssDeploy.deployVat();
-        dssDeploy.deployDai(99);
+        dssDeploy.deploydotBtc(99);
         dssDeploy.deployTaxation();
         dssDeploy.deployAuctions(address(gov));
         dssDeploy.deployPause(0, address(authority));
@@ -81,7 +81,7 @@ contract DssDeployTest is DssDeployTestBase {
         assertEq(vat.gem("COL", address(this)), 0);
     }
 
-    function testFrobDrawDai() public {
+    function testFrobDrawdotBtc() public {
         deploy();
         assertEq(dai.balanceOf(address(this)), 0);
         weth.mint(1 ether);
@@ -98,7 +98,7 @@ contract DssDeployTest is DssDeployTestBase {
         assertEq(vat.dai(address(this)), 0);
     }
 
-    function testFrobDrawDaiGem() public {
+    function testFrobDrawdotBtcGem() public {
         deploy();
         assertEq(dai.balanceOf(address(this)), 0);
         col.mint(1 ether);
@@ -112,7 +112,7 @@ contract DssDeployTest is DssDeployTestBase {
         assertEq(dai.balanceOf(address(this)), 20 ether);
     }
 
-    function testFrobDrawDaiLimit() public {
+    function testFrobDrawdotBtcLimit() public {
         deploy();
         weth.mint(1 ether);
         weth.approve(address(ethJoin), uint(-1));
@@ -120,7 +120,7 @@ contract DssDeployTest is DssDeployTestBase {
         vat.frob("ETH", address(this), address(this), address(this), 0.5 ether, 100 ether); // 0.5 * 300 / 1.5 = 100 DAI max
     }
 
-    function testFrobDrawDaiGemLimit() public {
+    function testFrobDrawdotBtcGemLimit() public {
         deploy();
         col.mint(1 ether);
         col.approve(address(colJoin), 1 ether);
@@ -128,7 +128,7 @@ contract DssDeployTest is DssDeployTestBase {
         vat.frob("COL", address(this), address(this), address(this), 0.5 ether, 20.454545454545454545 ether); // 0.5 * 45 / 1.1 = 20.454545454545454545 DAI max
     }
 
-    function testFailFrobDrawDaiLimit() public {
+    function testFailFrobDrawdotBtcLimit() public {
         deploy();
         weth.mint(1 ether);
         weth.approve(address(ethJoin), uint(-1));
@@ -136,7 +136,7 @@ contract DssDeployTest is DssDeployTestBase {
         vat.frob("ETH", address(this), address(this), address(this), 0.5 ether, 100 ether + 1);
     }
 
-    function testFailFrobDrawDaiGemLimit() public {
+    function testFailFrobDrawdotBtcGemLimit() public {
         deploy();
         col.mint(1 ether);
         col.approve(address(colJoin), 1 ether);
@@ -144,7 +144,7 @@ contract DssDeployTest is DssDeployTestBase {
         vat.frob("COL", address(this), address(this), address(this), 0.5 ether, 20.454545454545454545 ether + 1);
     }
 
-    function testFrobPaybackDai() public {
+    function testFrobPaybackdotBtc() public {
         deploy();
         weth.mint(1 ether);
         weth.approve(address(ethJoin), uint(-1));
@@ -381,7 +381,7 @@ contract DssDeployTest is DssDeployTestBase {
         user1.doDeal(address(flap), batchId);
         assertEq(gov.balanceOf(address(flap)), 0);
         user1.doHope(address(vat), address(daiJoin));
-        user1.doDaiExit(address(daiJoin), address(user1), 0.05 ether);
+        user1.dodotBtcExit(address(daiJoin), address(user1), 0.05 ether);
         assertEq(dai.balanceOf(address(user1)), 0.05 ether);
     }
 

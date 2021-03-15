@@ -26,11 +26,11 @@ import {Vat} from "dss/vat.sol";
 import {Jug} from "dss/jug.sol";
 import {Vow} from "dss/vow.sol";
 import {Cat} from "dss/cat.sol";
-import {DaiJoin} from "dss/join.sol";
+import {dotBtcJoin} from "dss/join.sol";
 import {Flapper} from "dss/flap.sol";
 import {Flopper} from "dss/flop.sol";
 import {Flipper} from "dss/flip.sol";
-import {Dai} from "dss/dai.sol";
+import {dotBtc} from "dss/dai.sol";
 import {End} from "dss/end.sol";
 import {ESM} from "esm/ESM.sol";
 import {Pot} from "dss/pot.sol";
@@ -68,17 +68,17 @@ contract CatFab {
     }
 }
 
-contract DaiFab {
-    function newDai(uint chainId) public returns (Dai dai) {
-        dai = new Dai(chainId);
+contract dotBtcFab {
+    function newdotBtc(uint chainId) public returns (dotBtc dai) {
+        dai = new dotBtc(chainId);
         dai.rely(msg.sender);
         dai.deny(address(this));
     }
 }
 
-contract DaiJoinFab {
-    function newDaiJoin(address vat, address dai) public returns (DaiJoin daiJoin) {
-        daiJoin = new DaiJoin(vat, dai);
+contract dotBtcJoinFab {
+    function newdotBtcJoin(address vat, address dai) public returns (dotBtcJoin daiJoin) {
+        daiJoin = new dotBtcJoin(vat, dai);
     }
 }
 
@@ -147,8 +147,8 @@ contract DssDeploy is DSAuth {
     JugFab     public jugFab;
     VowFab     public vowFab;
     CatFab     public catFab;
-    DaiFab     public daiFab;
-    DaiJoinFab public daiJoinFab;
+    dotBtcFab     public daiFab;
+    dotBtcJoinFab public daiJoinFab;
     FlapFab    public flapFab;
     FlopFab    public flopFab;
     FlipFab    public flipFab;
@@ -162,8 +162,8 @@ contract DssDeploy is DSAuth {
     Jug     public jug;
     Vow     public vow;
     Cat     public cat;
-    Dai     public dai;
-    DaiJoin public daiJoin;
+    dotBtc     public dai;
+    dotBtcJoin public daiJoin;
     Flapper public flap;
     Flopper public flop;
     Spotter public spotter;
@@ -188,8 +188,8 @@ contract DssDeploy is DSAuth {
         JugFab jugFab_,
         VowFab vowFab_,
         CatFab catFab_,
-        DaiFab daiFab_,
-        DaiJoinFab daiJoinFab_,
+        dotBtcFab daiFab_,
+        dotBtcJoinFab daiJoinFab_,
         FlapFab flapFab_,
         FlopFab flopFab_,
         FlipFab flipFab_,
@@ -228,12 +228,12 @@ contract DssDeploy is DSAuth {
         vat.rely(address(spotter));
     }
 
-    function deployDai(uint256 chainId) public auth {
+    function deploydotBtc(uint256 chainId) public auth {
         require(address(vat) != address(0), "Missing previous step");
 
         // Deploy
-        dai = daiFab.newDai(chainId);
-        daiJoin = daiJoinFab.newDaiJoin(address(vat), address(dai));
+        dai = daiFab.newdotBtc(chainId);
+        daiJoin = daiJoinFab.newdotBtcJoin(address(vat), address(dai));
         dai.rely(address(daiJoin));
     }
 

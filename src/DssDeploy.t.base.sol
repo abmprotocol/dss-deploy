@@ -30,12 +30,12 @@ contract FakeUser {
         DSToken(token).approve(guy);
     }
 
-    function doDaiJoin(address obj, address urn, uint wad) public {
-        DaiJoin(obj).join(urn, wad);
+    function dodotBtcJoin(address obj, address urn, uint wad) public {
+        dotBtcJoin(obj).join(urn, wad);
     }
 
-    function doDaiExit(address obj, address guy, uint wad) public {
-        DaiJoin(obj).exit(guy, wad);
+    function dodotBtcExit(address obj, address guy, uint wad) public {
+        dotBtcJoin(obj).exit(guy, wad);
     }
 
     function doWethJoin(address obj, address gem, address urn, uint wad) public {
@@ -203,8 +203,8 @@ contract DssDeployTestBase is DSTest, ProxyActions {
     JugFab jugFab;
     VowFab vowFab;
     CatFab catFab;
-    DaiFab daiFab;
-    DaiJoinFab daiJoinFab;
+    dotBtcFab daiFab;
+    dotBtcJoinFab daiJoinFab;
     FlapFab flapFab;
     FlopFab flopFab;
     FlipFab flipFab;
@@ -232,8 +232,8 @@ contract DssDeployTestBase is DSTest, ProxyActions {
     Cat cat;
     Flapper flap;
     Flopper flop;
-    Dai dai;
-    DaiJoin daiJoin;
+    dotBtc dai;
+    dotBtcJoin daiJoin;
     Spotter spotter;
     Pot pot;
     End end;
@@ -260,8 +260,8 @@ contract DssDeployTestBase is DSTest, ProxyActions {
         jugFab = new JugFab();
         vowFab = new VowFab();
         catFab = new CatFab();
-        daiFab = new DaiFab();
-        daiJoinFab = new DaiJoinFab();
+        daiFab = new dotBtcFab();
+        daiJoinFab = new dotBtcJoinFab();
         flapFab = new FlapFab();
         flopFab = new FlopFab();
         flipFab = new FlipFab();
@@ -308,7 +308,7 @@ contract DssDeployTestBase is DSTest, ProxyActions {
 
     function deployKeepAuth() public {
         dssDeploy.deployVat();
-        dssDeploy.deployDai(99);
+        dssDeploy.deploydotBtc(99);
         dssDeploy.deployTaxation();
         dssDeploy.deployAuctions(address(gov));
         dssDeploy.deployLiquidator();
